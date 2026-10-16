@@ -1,0 +1,9 @@
+name: Java Walk Test
+on: push 
+
+jobs:
+  test:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - run: rm -rf out-test out && mkdir -p out-test out && javac -d out-test --module-path "artifacts:lib" --module-source-path modules -m info.kgeorgiy.java.advanced.walk && javac -d out -cp "artifacts/info.kgeorgiy.java.advanced.base.jar" $(find info -name '*.java') && java --module-path "out-test:artifacts:lib" --add-modules info.kgeorgiy.java.advanced.walk -cp out:out-test info.kgeorgiy.java.advanced.walk.Tester Walk kgeorgiy.ja.codejava.walk.Walk
